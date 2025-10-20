@@ -193,6 +193,8 @@ app.post("/login", express.text(), (req, res) => {
     console.log(data);
 
     if (data["pass"] === "314159") {
+        
+        let currentDate = Date.now();
 
         let jwtToken = jwt.sign({
             isValidUser: true,
@@ -257,8 +259,8 @@ app.get("/isuserlogged", verMiddleware, (req, res) => {
 })
 
 
-let port = process.env.port;
+let port = process.env.PORT;
 app.listen(port | 9600, () => {
-    console.log("application deployed on localhost:9600")
+    console.log("application deployed on localhost:"+port)
 })
 
