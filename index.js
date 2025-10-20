@@ -22,7 +22,7 @@ function verMiddleware(req, res, next) {
 
     if (!token) return res.send("no token found buddy");
 
-    jwt.verify(token, process.env["secret_key"], (err, decoded) => {
+    jwt.verify(token, process.env["SECRET_KEY"], (err, decoded) => {
         if (err) {
 
             if (refreshToken) {
@@ -109,7 +109,7 @@ async function getAnswer(string) {
 
     const client = new OpenAI({
         baseURL: "https://router.huggingface.co/v1",
-        apiKey: process.env["openai_api_key"],
+        apiKey: process.env["HUGGINGFACESKEY"],
     });
 
     const chatCompletion = await client.chat.completions.create({
@@ -193,7 +193,7 @@ app.post("/login", express.text(), (req, res) => {
     console.log(data);
 
     if (data["pass"] === "314159") {
-        
+
         let currentDate = Date.now();
 
         let jwtToken = jwt.sign({
